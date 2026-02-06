@@ -1,0 +1,20 @@
+name: k8s-security
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Trivy scan
+      uses: aquasecurity/trivy-action@0.20.0
+      with:
+        scan-type: fs
+        severity: HIGH,CRITICAL
+    - name: kube-bench
+      run: echo "Run kube-bench here"
+    - name: kube-linter
+      run: echo "Run kube-linter here"
