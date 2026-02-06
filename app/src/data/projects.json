@@ -1,0 +1,54 @@
+[
+  {
+    "id": "cicd-security-portfolio",
+    "name": "CI CD Security for Portfolio Application",
+    "description": "Secure CI CD pipeline with dependency scanning, container scanning, policy checks, and automated security gates for a portfolio application.",
+    "github": "https://github.com/asadyare/portfolio-cicd-security",
+    "tools": [
+      "GitHub Actions",
+      "Trivy",
+      "npm audit",
+      "Docker",
+      "Node.js"
+    ],
+    "badges": [
+      "CI CD",
+      "Security",
+      "DevSecOps"
+    ]
+  },
+  {
+    "id": "threat-modeling-portfolio",
+    "name": "Threat Modeling and Risk Analysis",
+    "description": "Structured threat modeling and risk analysis for a portfolio application with documented assets, threats, mitigations, and residual risk.",
+    "github": "https://github.com/asadyare/portfolio-threat-modeling",
+    "tools": [
+      "STRIDE",
+      "Markdown",
+      "GitHub",
+      "Diagrams"
+    ],
+    "badges": [
+      "Threat Modeling",
+      "Risk Analysis",
+      "Security"
+    ]
+  },
+  {
+    "id": "monitoring-daily-security",
+    "name": "Monitoring and Daily Security Checks",
+    "description": "Monitoring setup with daily automated security checks, alerts, and scheduled scans for application and dependencies.",
+    "github": "https://github.com/asadyare/portfolio-monitoring-security",
+    "tools": [
+      "GitHub Actions",
+      "Cron",
+      "Trivy",
+      "Dependabot"
+    ],
+    "badges": [
+      "Monitoring",
+      "Automation",
+      "Security"
+    ]
+  }
+]
