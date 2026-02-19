@@ -28,7 +28,7 @@ lifecycle coverage.
 - Grafana
 - GitHub Actions
 
-[![k8s-security Architecture](diagrams/architecture.png)](diagrams/architecture.png)
+[![k8s-security Architecture](docs/architecture.png)](docs/architecture.png)
 
 ## Platform Kubernetes security focused
 

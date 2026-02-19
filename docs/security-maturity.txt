@@ -1,0 +1,33 @@
+Security Maturity Self Assessment
+
+Build Security
+Status Mature
+CI scanning, SBOM, dependency checks in place
+
+Deployment Security
+Status Mature
+Admission controls, least privilege pods, network policies
+
+Runtime Security
+Status Advanced
+Falco runtime detection with severity based alerting
+
+Monitoring and Visibility
+Status Mature
+Metrics, logs, dashboards available
+
+Governance and Reporting
+Status Advanced
+Daily scans, alert issues, weekly reports
+
+Overall Maturity
+Advanced DevSecOps implementation
+
+Strengths
+End to end coverage
+Clear evidence trail
+Runtime visibility
+
+Planned Improvements
+Automated response actions
+External SIEM integration

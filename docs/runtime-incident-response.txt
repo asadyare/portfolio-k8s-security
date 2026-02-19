@@ -1,0 +1,35 @@
+Runtime Incident Response Playbook
+
+Detection
+Falco triggers a Critical or High severity event.
+
+Triage
+Identify affected namespace and pod.
+Confirm event type and rule triggered.
+
+Containment
+Scale deployment to zero if needed.
+Apply temporary network deny policy.
+
+Investigation
+Inspect pod logs and Falco event output.
+Review recent deployments and image versions.
+
+Eradication
+Redeploy workload from trusted image.
+Rotate credentials if required.
+
+Recovery
+Restore replicas.
+Monitor Falco and metrics closely.
+
+Post Incident
+Document root cause.
+Update threat model if needed.
+Add new Falco rule if gap identified.
+
+Evidence
+Falco logs
+Kubernetes events
+GitHub alert issue
+Weekly security report
