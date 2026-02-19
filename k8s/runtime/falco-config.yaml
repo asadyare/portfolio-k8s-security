@@ -1,0 +1,15 @@
+rules:
+- rule: Terminal shell in container
+  priority: CRITICAL
+  output: "Critical shell execution in container"
+  condition: spawned_process and container and proc.name in (bash, sh)
+
+- rule: Write below etc
+  priority: HIGH
+  output: "Write to /etc detected"
+  condition: container and write and fd.name startswith /etc
+
+- rule: Network tool execution
+  priority: MEDIUM
+  output: "Network tool executed in container"
+  condition: container and proc.name in (curl, wget, nc)

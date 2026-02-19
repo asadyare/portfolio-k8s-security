@@ -1,18 +1,26 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app-ingress
+  name: portfolio
   namespace: portfolio
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - portfolio.example.com
+    secretName: portfolio-tls
   rules:
-  - host: app.local
+  - host: asads-portfolio.uk
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: node-app
+            name: portfolio
             port:
               number: 80

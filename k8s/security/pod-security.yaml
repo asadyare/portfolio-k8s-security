@@ -1,10 +1,8 @@
-apiVersion: policy/v1
-kind: PodDisruptionBudget
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: node-app-pdb
-  namespace: portfolio
-spec:
-  minAvailable: 1
-  selector:
-    matchLabels:
-      app: node-app
+  name: portfolio
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
