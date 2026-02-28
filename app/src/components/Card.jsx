@@ -4,7 +4,7 @@ export default function Card({ title, description, tags, repoUrl, badgeUrl }) {
   return (
     <motion.article
       whileHover={{ y: -6, scale: 1.01 }}
-      className="card rounded-lg border p-6"
+      className="card flex h-full min-w-0 flex-col rounded-lg border p-6"
     >
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-lg font-semibold text-primary-500">
@@ -20,7 +20,7 @@ export default function Card({ title, description, tags, repoUrl, badgeUrl }) {
         )}
       </div>
 
-      <p className="mt-2 text-gray-700 dark:text-gray-300">
+      <p className="mt-2 flex-1 text-gray-700 dark:text-gray-300">
         {description}
       </p>
 
