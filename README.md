@@ -157,6 +157,34 @@ The `k8s/` manifests deploy automatically via GitHub Actions on push to main (wh
 
 **Prerequisites:** nginx Ingress Controller, cert-manager (for TLS), and a cluster with the `portfolio` namespace created or allowed by the manifests.
 
+### Deploy from your machine
+
+Use your local kubeconfig (no GitHub secret needed). From the repo root:
+
+**PowerShell (Windows):**
+```powershell
+.\deploy.ps1
+# Or with a specific image:
+.\deploy.ps1 ghcr.io/asadyare/portfolio-frontend:v1.0.0
+```
+
+**Bash (Linux / macOS / WSL / Git Bash):**
+```bash
+chmod +x deploy.sh
+./deploy.sh
+# Or with a specific image:
+./deploy.sh ghcr.io/asadyare/portfolio-frontend:v1.0.0
+```
+
+**Or run the commands yourself:**
+```bash
+kubectl cluster-info
+kubectl apply -f k8s/ -R
+kubectl set image deployment/portfolio app=ghcr.io/asadyare/portfolio-frontend:latest -n portfolio
+```
+
+Ensure `kubectl` is installed and your kubeconfig points at the right cluster (`KUBECONFIG` or `~/.kube/config`).
+
 ## Connected Repositories
 
 1. [Frontend application](https://github.com/asadyare/portfolio-frontend)
