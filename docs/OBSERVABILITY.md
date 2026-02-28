@@ -140,3 +140,5 @@ In Grafana → Explore → Prometheus:
 - **No data in Grafana:** Ensure Prometheus is scraping. Check **Status** → **Targets** in Prometheus.
 - **Ingress metrics missing:** The Ingress controller must expose `/metrics`. Verify with `kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 10254:10254` and `curl localhost:10254/metrics`.
 - **Dashboard not loading:** Ensure the ConfigMap has label `grafana_dashboard: "1"` and is in the `monitoring` namespace.
+- **`admission-patch` timeout / Helm post-install failed:** Common on minikube/kind. The stack often still works. Check `kubectl get pods -n monitoring`. If Grafana is Running, use it. To retry a clean install: `helm uninstall prometheus -n monitoring` then run the script again (it now uses `--timeout 15m`).
+- **`Unable to connect to the server: EOF`:** The cluster stopped or disconnected. Restart it: `minikube start` (or `kind` / Docker Desktop), then retry `kubectl port-forward`.
