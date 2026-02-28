@@ -33,9 +33,17 @@ jobs:
 
       - name: Configure kubeconfig
         run: |
+          if [ -z "${{ secrets.KUBE_CONFIG_DATA }}" ]; then
+            echo "::error::KUBE_CONFIG_DATA secret is not set. Add your cluster kubeconfig (base64-encoded) in Settings → Secrets → Actions."
+            exit 1
+          fi
           mkdir -p ~/.kube
           echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > ~/.kube/config
           chmod 600 ~/.kube/config
+
+      - name: Verify cluster connection
+        run: |
+          kubectl cluster-info || (echo "::error::Cannot reach cluster. Check KUBE_CONFIG_DATA and that the cluster is reachable from GitHub Actions." && exit 1)
 
       - name: Deploy manifests
         run: |
