@@ -6,8 +6,8 @@ export default function Projects() {
       title: 'CI CD Security for Portfolio Application',
       description: 'Enforced CI pipelines with dependency scanning, secrets detection, and filesystem vulnerability checks.',
       tags: ['CI CD', 'DevSecOps', 'Trivy', 'Gitleaks'],
-      repoUrl: 'https://github.com/asadyare/portfolio-ci-security',
-      badgeUrl: 'https://github.com/asadyare/portfolio-ci-security/actions/workflows/ci-security.yml/badge.svg'
+      repoUrl: 'https://github.com/asadyare/portfolio-ci-cd-security',
+      badgeUrl: 'https://github.com/asadyare/portfolio-ci-cd-security/actions/workflows/ci-security.yml/badge.svg'
     },
     {
       title: 'Threat Modeling and Risk Analysis',
@@ -20,7 +20,7 @@ export default function Projects() {
       description: 'Scheduled security checks detecting dependency and vulnerability drift.',
       tags: ['Monitoring', 'GitHub Actions', 'Trivy'],
       repoUrl: 'https://github.com/asadyare/portfolio-daily-security',
-      badgeUrl: 'https://github.com/asadyare/portfolio-daily-security/actions/workflows/daily-dependency-scan.yml/badge.svg'
+      badgeUrl: 'https://github.com/asadyare/portfolio-daily-security/actions/workflows/security-alerting-and-reporting.yml/badge.svg'
     }
   ]
 

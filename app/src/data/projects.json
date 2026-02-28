@@ -3,7 +3,7 @@
     "id": "cicd-security-portfolio",
     "name": "CI CD Security for Portfolio Application",
     "description": "Secure CI CD pipeline with dependency scanning, container scanning, policy checks, and automated security gates for a portfolio application.",
-    "github": "https://github.com/asadyare/portfolio-cicd-security",
+    "github": "https://github.com/asadyare/portfolio-ci-cd-security",
     "tools": [
       "GitHub Actions",
       "Trivy",
@@ -38,7 +38,7 @@
     "id": "monitoring-daily-security",
     "name": "Monitoring and Daily Security Checks",
     "description": "Monitoring setup with daily automated security checks, alerts, and scheduled scans for application and dependencies.",
-    "github": "https://github.com/asadyare/portfolio-monitoring-security",
+    "github": "https://github.com/asadyare/portfolio-daily-security",
     "tools": [
       "GitHub Actions",
       "Cron",
