@@ -60,6 +60,8 @@ evidence
 - ingress Ingress configuration with TLS
 
 - observability Prometheus ServiceMonitor and Grafana dashboard
+
+See [docs/OBSERVABILITY.md](docs/OBSERVABILITY.md) for how to observe the web app with Prometheus and Grafana.
   placeholders
 
 - runtime Falco runtime detection configuration and manifests
