@@ -17,6 +17,8 @@ spec:
         runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
+      imagePullSecrets:
+      - name: ghcr.io-pull
       containers:
       - name: app
         image: ghcr.io/asadyare/portfolio-frontend:latest

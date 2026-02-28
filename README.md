@@ -157,6 +157,39 @@ The `k8s/` manifests deploy automatically via GitHub Actions on push to main (wh
 
 **Prerequisites:** nginx Ingress Controller, cert-manager (for TLS), and a cluster with the `portfolio` namespace created or allowed by the manifests.
 
+### Ingress controller and DNS
+
+Install the NGINX Ingress Controller once per cluster:
+
+**Minikube:** `minikube addons enable ingress`
+
+**Other (kind, Docker Desktop, cloud):**
+```powershell
+.\scripts\install-ingress.ps1
+```
+```bash
+chmod +x scripts/install-ingress.sh && ./scripts/install-ingress.sh
+```
+
+**DNS:** The Ingress uses host `asads-portfolio.uk`. Point that domain to the Ingress controller:
+
+- **Cloud:** Use the LoadBalancer external IP from `kubectl get svc -n ingress-nginx ingress-nginx-controller`
+- **Minikube:** `minikube ip` then add a hosts entry: `<minikube-ip> asads-portfolio.uk`
+- **Kind / local:** LoadBalancer may stay Pending; use `kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 80:80` and use `http://localhost` or `http://asads-portfolio.uk` with a hosts entry to 127.0.0.1
+
+### TLS with cert-manager
+
+The Ingress is set up for TLS (cert-manager + Let's Encrypt). Install cert-manager once per cluster:
+
+```powershell
+.\scripts\install-cert-manager.ps1
+```
+```bash
+./scripts/install-cert-manager.sh
+```
+
+Then create a ClusterIssuer for Let's Encrypt (e.g. [HTTP01](https://cert-manager.io/docs/configuration/acme/http01/)). cert-manager will issue the certificate referenced by the Ingress (`portfolio-tls`).
+
 ### Deploy from your machine
 
 Use your local kubeconfig (no GitHub secret needed). From the repo root:
@@ -184,6 +217,20 @@ kubectl set image deployment/portfolio app=ghcr.io/asadyare/portfolio-frontend:l
 ```
 
 Ensure `kubectl` is installed and your kubeconfig points at the right cluster (`KUBECONFIG` or `~/.kube/config`).
+
+### Pulling the image from GHCR
+
+The deployment uses `ghcr.io/asadyare/portfolio-frontend:latest`. That image is built and pushed by [portfolio-frontend](https://github.com/asadyare/portfolio-frontend) CI on every push to main.
+
+If the image is **private**, create a pull secret once (use a [GitHub PAT](https://github.com/settings/tokens) with `read:packages`):
+
+**PowerShell:** `$env:GITHUB_PAT = "ghp_xxx"; .\scripts\create-ghcr-pull-secret.ps1`
+
+**Bash:** `GITHUB_PAT=ghp_xxx ./scripts/create-ghcr-pull-secret.sh`
+
+Then restart: `kubectl rollout restart deployment/portfolio -n portfolio`
+
+If the package is **public** (Package settings → Change visibility), you can remove `imagePullSecrets` from `k8s/base/deployment.yaml`.
 
 ## Connected Repositories
 
