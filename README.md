@@ -146,6 +146,17 @@ Plaintext traffic Control Ingress with TLS Layer Ingress
 
 Silent failure Control Prometheus and Grafana Layer Observability
 
+## Deploy to Kubernetes
+
+The `k8s/` manifests deploy automatically via GitHub Actions on push to main (when `k8s/` or `docker/` changes), or manually via **Actions** → **Deploy to Kubernetes** → **Run workflow**.
+
+**Required secrets** (Settings → Secrets → Actions):
+
+- `KUBE_CONFIG_DATA` – base64-encoded kubeconfig for your cluster
+- `K8S_DEPLOY_IMAGE` (optional) – container image to deploy; defaults to `ghcr.io/asadyare/portfolio-frontend:latest`
+
+**Prerequisites:** nginx Ingress Controller, cert-manager (for TLS), and a cluster with the `portfolio` namespace created or allowed by the manifests.
+
 ## Connected Repositories
 
 1. [Frontend application](https://github.com/asadyare/portfolio-frontend)

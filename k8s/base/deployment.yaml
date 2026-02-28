@@ -19,9 +19,9 @@ spec:
           type: RuntimeDefault
       containers:
       - name: app
-        image: portfolio:latest
+        image: ghcr.io/asadyare/portfolio-frontend:latest
         ports:
-        - containerPort: 3000
+        - containerPort: 8080
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true

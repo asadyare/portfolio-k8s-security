@@ -1,0 +1,47 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'k8s/**'
+      - 'docker/**'
+  workflow_dispatch:
+    inputs:
+      image:
+        description: 'Container image to deploy (e.g. ghcr.io/asadyare/portfolio-frontend:latest)'
+        required: false
+        default: ''
+
+env:
+  DEPLOY_IMAGE: ${{ github.event.inputs.image || secrets.K8S_DEPLOY_IMAGE || 'ghcr.io/asadyare/portfolio-frontend:latest' }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: 'latest'
+
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > ~/.kube/config
+          chmod 600 ~/.kube/config
+
+      - name: Deploy manifests
+        run: |
+          kubectl apply -f k8s/ -R
+
+      - name: Update deployment image
+        if: env.DEPLOY_IMAGE != 'ghcr.io/asadyare/portfolio-frontend:latest'
+        run: |
+          kubectl set image deployment/portfolio app=${{ env.DEPLOY_IMAGE }} -n portfolio
