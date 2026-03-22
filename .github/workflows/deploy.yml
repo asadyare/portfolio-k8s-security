@@ -20,6 +20,8 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     environment:
       name: production
 
@@ -49,7 +51,9 @@ jobs:
         run: |
           kubectl apply -f k8s/ -R
 
+      # Always align the running Deployment with DEPLOY_IMAGE (secret / dispatch / default).
+      # If this step is skipped when DEPLOY_IMAGE equals the default string, kubectl apply can
+      # leave an older image from manifests in place.
       - name: Update deployment image
-        if: env.DEPLOY_IMAGE != 'ghcr.io/asadyare/portfolio-frontend:latest'
         run: |
-          kubectl set image deployment/portfolio app=${{ env.DEPLOY_IMAGE }} -n portfolio
+          kubectl set image deployment/portfolio app="${{ env.DEPLOY_IMAGE }}" -n portfolio
